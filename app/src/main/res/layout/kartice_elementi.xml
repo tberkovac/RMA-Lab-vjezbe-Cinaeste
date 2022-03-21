@@ -25,7 +25,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
             android:textSize="14sp">
-
         </TextView>
     </LinearLayout>
 

@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">LV1 drugi put</string>
+    <string name="app_name">Cinaeste</string>
     <string name="favorite">Favorite</string>
     <string name="search">Search</string>
     <string name="recent">Recent</string>
+    <string name="zanr_filma">Genre</string>
 </resources>
