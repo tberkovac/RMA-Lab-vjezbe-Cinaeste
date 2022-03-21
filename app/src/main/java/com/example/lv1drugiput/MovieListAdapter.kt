@@ -37,7 +37,7 @@ class MovieListAdapter(
 
         var id: Int = context.resources.getIdentifier(genreMatch, "drawable", context.packageName)
 
-        if (id === 0) id = context.resources.getIdentifier("slika1", "drawable", context.packageName)
+        if (id == 0) id = context.resources.getIdentifier("defaultslika", "drawable", context.packageName)
 
         holder.movieImage.setImageResource(id)
     }
