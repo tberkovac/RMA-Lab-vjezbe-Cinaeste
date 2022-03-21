@@ -2,34 +2,29 @@ package com.example.lv1drugiput
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var listView: ListView
-    lateinit var editText: EditText
-    lateinit var button: Button
+    private lateinit var favoriteMovies: RecyclerView
+    private lateinit var favoriteMoviesAdapter: MovieListAdapter
+    private var movieListViewModel = MovieListViewModel()
 
-    private val listaVrijednosti = arrayListOf<String>()
-    private lateinit var adapter: MyArrayAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        button = findViewById<Button>(R.id.button1)
-        editText = findViewById<EditText>(R.id.editText1)
-        listView = findViewById<ListView>(R.id.listView1)
-        adapter = MyArrayAdapter(this, R.layout.element_list, listaVrijednosti)
-        listView.adapter = adapter
-        button.setOnClickListener(){
-            addToList()
-        }
+        favoriteMovies = findViewById(R.id.favoriteMovies)
+        favoriteMovies.layoutManager = LinearLayoutManager(
+            this,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        favoriteMoviesAdapter = MovieListAdapter(listOf())
+        favoriteMovies.adapter = favoriteMoviesAdapter
+        favoriteMoviesAdapter.updateMovies(movieListViewModel.getFavoriteMovies())
     }
-
-    private fun addToList() {
-        listaVrijednosti.add(0,editText.text.toString())
-        adapter.notifyDataSetChanged()
-        editText.setText("")
-    }
-
 
 }
