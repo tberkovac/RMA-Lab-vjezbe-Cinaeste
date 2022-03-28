@@ -1,5 +1,7 @@
 package com.example.lv1drugiput
 
+import com.example.lv1drugiput.data.Movie
+
 fun favoriteMovies(): List<Movie>{
     return listOf(
         Movie(1,"Pride and prejudice",

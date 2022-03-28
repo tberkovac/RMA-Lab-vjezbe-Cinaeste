@@ -1,14 +1,14 @@
-package com.example.lv1drugiput
+package com.example.lv1drugiput.view
 
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.lv1drugiput.R
+import com.example.lv1drugiput.data.Movie
 
 class MovieListAdapter(
     private var movies: List<Movie>
@@ -29,7 +29,7 @@ class MovieListAdapter(
         return MovieViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MovieListAdapter.MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieTitle.text = movies[position].title
         val genreMatch: String = movies[position].genre
 

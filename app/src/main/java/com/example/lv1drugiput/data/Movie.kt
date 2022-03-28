@@ -1,4 +1,4 @@
-package com.example.lv1drugiput
+package com.example.lv1drugiput.data
 
 data class Movie (
     val id: Long,
