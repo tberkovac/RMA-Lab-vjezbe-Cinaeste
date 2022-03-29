@@ -1,11 +1,13 @@
 package com.example.lv1drugiput
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.lv1drugiput.R
 import com.example.lv1drugiput.data.Movie
 import com.example.lv1drugiput.viewmodel.MovieDetailViewModel
 
@@ -39,7 +41,10 @@ class MovieDetailActivity : AppCompatActivity() {
         title.text=movie.title
         releaseDate.text=movie.releaseDate
         genre.text=movie.genre
-        website.text=movie.homePage
+        website.text=movie.homepage
+        website.setOnClickListener(){
+            showWebiste();
+        }
         overview.text=movie.overview
         val context: Context = poster.context
         var id: Int = context.resources
@@ -48,4 +53,17 @@ class MovieDetailActivity : AppCompatActivity() {
             .getIdentifier("picture1", "drawable", context.packageName)
         poster.setImageResource(id)
     }
+
+    private fun showWebiste() {
+        val webIntent: Intent = Uri.parse(movie.homepage).let { webpage ->
+            Intent(Intent.ACTION_VIEW, webpage)
+        }
+        try {
+            startActivity(webIntent)
+        } catch (e: ActivityNotFoundException) {
+            // Definisati naredbe ako ne postoji aplikacija za navedenu akciju
+        }
+    }
+
+
 }
