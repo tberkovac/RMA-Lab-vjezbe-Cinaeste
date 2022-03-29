@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LV1DrugiPut">
         <activity
+            android:name=".view.MovieDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
