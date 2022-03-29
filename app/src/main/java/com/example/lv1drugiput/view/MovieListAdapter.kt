@@ -11,7 +11,8 @@ import com.example.lv1drugiput.R
 import com.example.lv1drugiput.data.Movie
 
 class MovieListAdapter(
-    private var movies: List<Movie>
+    private var movies: List<Movie>,
+    private val onItemClicked: (movie:Movie) -> Unit
     ) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,6 +41,7 @@ class MovieListAdapter(
         if (id == 0) id = context.resources.getIdentifier("defaultslika", "drawable", context.packageName)
 
         holder.movieImage.setImageResource(id)
+        holder.itemView.setOnClickListener{ onItemClicked(movies[position]) }
     }
 
     override fun getItemCount(): Int = movies.size
