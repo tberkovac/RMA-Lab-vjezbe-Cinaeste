@@ -62,5 +62,30 @@ class IntentInstrumentedTest {
         Intents.release()
     }
 
+    @Test
+    fun testLayoutDetailsActivity(){
+        val pokreniDetalje = Intent(ApplicationProvider.getApplicationContext(),MovieDetailActivity::class.java)
+        pokreniDetalje.putExtra("movie_title","Pulp Fiction")
+        launchActivity<MovieDetailActivity>(pokreniDetalje)
+        onView(withId(R.id.movie_poster)).check(isCompletelyLeftOf(withId(R.id.movie_title)))
+        onView(withId(R.id.movie_release_date)).check(isCompletelyBelow(withId(R.id.movie_title)))
+        onView(withId(R.id.movie_release_date)).check(isCompletelyRightOf(withId(R.id.movie_poster)))
+        onView(withId(R.id.movie_genre)).check(isCompletelyBelow(withId(R.id.movie_release_date)))
+        onView(withId(R.id.movie_genre)).check(isLeftAlignedWith(withId(R.id.movie_release_date)))
+        onView(withId(R.id.movie_website)).check(isCompletelyBelow(withId(R.id.movie_poster)))
+        onView(withId(R.id.movie_overview)).check(isCompletelyBelow(withId(R.id.movie_website))).check(isLeftAlignedWith(withId(R.id.movie_website)))
+    }
+
+    @Test
+    fun testYoutubeAction(){
+        Intents.init()
+        val pokreniDetalje = Intent(ApplicationProvider.getApplicationContext(),MovieDetailActivity::class.java)
+        pokreniDetalje.putExtra("movie_title","Pulp Fiction")
+        launchActivity<MovieDetailActivity>(pokreniDetalje)
+        onView(withId(R.id.movie_title)).perform(click())
+        intended(hasPackage("com.google.android.youtube"))
+        Intents.release()
+    }
+
 
 }
