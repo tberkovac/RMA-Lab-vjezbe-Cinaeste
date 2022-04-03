@@ -42,6 +42,9 @@ class MovieDetailActivity : AppCompatActivity() {
         title.setOnClickListener{
             youtubeSearch()
         }
+        shareButton.setOnClickListener{
+            shareOverview()
+        }
         val extras = intent.extras
 
         if (extras != null) {
@@ -89,4 +92,13 @@ class MovieDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun shareOverview(){
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, movie.overview)
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(intent, null)
+        startActivity(shareIntent)
+    }
 }
