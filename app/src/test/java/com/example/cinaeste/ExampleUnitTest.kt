@@ -1,4 +1,4 @@
-package com.example.lv1drugiput
+package com.example.cinaeste
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.lv1drugiput
+package com.example.cinaeste
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

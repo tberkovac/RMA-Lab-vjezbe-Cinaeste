@@ -1,4 +1,4 @@
-package com.example.lv1drugiput.view
+package com.example.cinaeste.view
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lv1drugiput.R
-import com.example.lv1drugiput.data.Movie
+import com.example.cinaeste.R
+import com.example.cinaeste.data.Movie
 
 class MovieListAdapter(
     private var movies: List<Movie>,

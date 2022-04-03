@@ -1,4 +1,4 @@
-package com.example.lv1drugiput
+package com.example.cinaeste
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +7,9 @@ import android.util.Log
 import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lv1drugiput.data.Movie
-import com.example.lv1drugiput.view.MovieListAdapter
-import com.example.lv1drugiput.viewmodel.MovieListViewModel
+import com.example.cinaeste.data.Movie
+import com.example.cinaeste.view.MovieListAdapter
+import com.example.cinaeste.viewmodel.MovieListViewModel
 
 
 class MainActivity : AppCompatActivity() {

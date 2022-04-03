@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.lv1drugiput">
+    package="com.example.cinaeste">
 
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
         android:theme="@style/Theme.LV1DrugiPut">
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.cinaeste.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MovieDetailActivity"
+            android:name="com.example.cinaeste.MovieDetailActivity"
             android:exported="false" />
     </application>
 

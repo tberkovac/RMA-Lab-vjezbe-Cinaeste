@@ -1,7 +1,7 @@
-package com.example.lv1drugiput.viewmodel
+package com.example.cinaeste.viewmodel
 
-import com.example.lv1drugiput.data.Movie
-import com.example.lv1drugiput.data.MovieRepository
+import com.example.cinaeste.data.Movie
+import com.example.cinaeste.data.MovieRepository
 
 class MovieDetailViewModel {
     fun getMovieByTitle(name:String): Movie {

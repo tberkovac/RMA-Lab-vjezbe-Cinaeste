@@ -1,6 +1,6 @@
-package com.example.lv1drugiput
+package com.example.cinaeste
 
-import com.example.lv1drugiput.data.Movie
+import com.example.cinaeste.data.Movie
 
 fun favoriteMovies(): List<Movie>{
     return listOf(

@@ -1,7 +1,7 @@
-package com.example.lv1drugiput.data
+package com.example.cinaeste.data
 
-import com.example.lv1drugiput.favoriteMovies
-import com.example.lv1drugiput.recentMovies
+import com.example.cinaeste.favoriteMovies
+import com.example.cinaeste.recentMovies
 
 object MovieRepository {
     fun getFavoriteMovies() : List<Movie> {

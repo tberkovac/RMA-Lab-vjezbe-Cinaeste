@@ -1,4 +1,4 @@
-package com.example.lv1drugiput
+package com.example.cinaeste
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.lv1drugiput.data.Movie
-import com.example.lv1drugiput.viewmodel.MovieDetailViewModel
+import com.example.cinaeste.data.Movie
+import com.example.cinaeste.viewmodel.MovieDetailViewModel
 
 class MovieDetailActivity : AppCompatActivity() {
     private var movieDetailViewModel =  MovieDetailViewModel()
