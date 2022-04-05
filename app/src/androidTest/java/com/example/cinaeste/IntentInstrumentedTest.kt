@@ -86,6 +86,4 @@ class IntentInstrumentedTest {
         intended(hasPackage("com.google.android.youtube"))
         Intents.release()
     }
-
-
 }

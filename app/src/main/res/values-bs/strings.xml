@@ -5,4 +5,6 @@
     <string name="search">Pretraži</string>
     <string name="recent">Skorašnji</string>
     <string name="zanr_filma">Žanr</string>
+    <string name="favorites">Najdrazi</string>
+    <string name="upcoming">Uskoro</string>
 </resources>

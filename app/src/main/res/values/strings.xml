@@ -4,4 +4,6 @@
     <string name="search">Search</string>
     <string name="recent">Recent</string>
     <string name="zanr_filma">Genre</string>
+    <string name="favorites">Favorites</string>
+    <string name="upcoming">Upcoming</string>
 </resources>
