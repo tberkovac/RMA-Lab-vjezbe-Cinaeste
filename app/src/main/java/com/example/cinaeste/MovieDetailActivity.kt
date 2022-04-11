@@ -5,12 +5,18 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cinaeste.data.Movie
+import androidx.fragment.app.Fragment
+import com.example.cinaeste.data.models.Movie
+import com.example.cinaeste.view.ActorsFragment
+import com.example.cinaeste.view.SimilarFragment
 import com.example.cinaeste.viewmodel.MovieDetailViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationBarView
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -23,6 +29,27 @@ class MovieDetailActivity : AppCompatActivity() {
     private lateinit var website : TextView
     private lateinit var poster : ImageView
     private lateinit var shareButton : FloatingActionButton
+    private lateinit var bottomNavigation: BottomNavigationView
+
+    private val mOnItemSelectedListener = NavigationBarView.OnItemSelectedListener{ item ->
+        when(item.itemId){
+            R.id.navForDetails_list_of_actors -> {
+                var actorsFragment = ActorsFragment(movie.title)
+                openFragment(actorsFragment)
+                Log.v("KLIKNUTO", "glumci")
+                return@OnItemSelectedListener true
+            }
+            R.id.navForDetails_similar_movies -> {
+                var similarFragment = SimilarFragment(movie.title)
+                Log.v("KLIKNUTO", "filmovi")
+                openFragment(similarFragment)
+                return@OnItemSelectedListener true
+            }
+        }
+        false
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +62,7 @@ class MovieDetailActivity : AppCompatActivity() {
         poster = findViewById(R.id.movie_poster)
         website = findViewById(R.id.movie_website)
         shareButton = findViewById(R.id.shareButton)
+        bottomNavigation = findViewById(R.id.detailNavigation)
 
         website.setOnClickListener{
             showWebsite()
@@ -53,6 +81,10 @@ class MovieDetailActivity : AppCompatActivity() {
         } else {
             finish()
         }
+
+        bottomNavigation.selectedItemId = R.id.navForDetails_list_of_actors
+        bottomNavigation.setOnItemSelectedListener(mOnItemSelectedListener)
+
     }
     private fun populateDetails() {
         title.text=movie.title
@@ -101,4 +133,12 @@ class MovieDetailActivity : AppCompatActivity() {
         val shareIntent = Intent.createChooser(intent, null)
         startActivity(shareIntent)
     }
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.actorSimilarContainer, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
 }

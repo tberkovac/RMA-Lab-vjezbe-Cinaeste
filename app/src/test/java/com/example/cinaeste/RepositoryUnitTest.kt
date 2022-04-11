@@ -1,8 +1,8 @@
 package com.example.cinaeste
 
-import com.example.cinaeste.data.Movie
+import com.example.cinaeste.data.models.Movie
 import org.hamcrest.CoreMatchers.`is` as Is
-import com.example.cinaeste.data.MovieRepository
+import com.example.cinaeste.data.repositories.MovieRepository
 import org.hamcrest.MatcherAssert.*
 import org.hamcrest.Matchers.hasItem
 import org.hamcrest.Matchers.not

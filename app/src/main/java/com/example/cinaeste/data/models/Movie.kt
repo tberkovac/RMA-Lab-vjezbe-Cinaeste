@@ -1,4 +1,4 @@
-package com.example.cinaeste.data
+package com.example.cinaeste.data.models
 
 data class Movie (
     val id: Long,

@@ -1,4 +1,4 @@
-package com.example.cinaeste
+package com.example.cinaeste.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.example.cinaeste.R
 
 class SearchFragment : Fragment() {
     private lateinit var searchText: EditText
