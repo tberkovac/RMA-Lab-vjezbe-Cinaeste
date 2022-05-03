@@ -1,13 +1,10 @@
 package com.example.cinaeste.view
 
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cinaeste.R
 
 class SimpleStringAdapter(list: List<String>) :RecyclerView.Adapter<SimpleStringAdapter.SimpleViewHolder>() {
 

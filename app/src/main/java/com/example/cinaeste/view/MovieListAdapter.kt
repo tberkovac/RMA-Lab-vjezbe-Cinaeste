@@ -12,7 +12,7 @@ import com.example.cinaeste.data.models.Movie
 
 class MovieListAdapter(
     private var movies: List<Movie>,
-    private val onItemClicked: (movie: Movie) -> Unit
+    private val onItemClicked: (movie: Movie, view1: View, view2: View) -> Unit
     ) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -41,7 +41,7 @@ class MovieListAdapter(
         if (id == 0) id = context.resources.getIdentifier("defaultslika", "drawable", context.packageName)
 
         holder.movieImage.setImageResource(id)
-        holder.itemView.setOnClickListener{ onItemClicked(movies[position]) }
+        holder.itemView.setOnClickListener{ onItemClicked(movies[position],holder.movieImage, holder.movieTitle) }
     }
 
     override fun getItemCount(): Int = movies.size

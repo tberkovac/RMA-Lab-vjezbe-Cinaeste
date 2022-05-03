@@ -7,11 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.*
 import com.example.cinaeste.R
-import com.example.cinaeste.data.repositories.ActorMovieRepository
 import com.example.cinaeste.viewmodel.MovieDetailViewModel
-import com.example.cinaeste.viewmodel.MovieListViewModel
 
 class ActorsFragment(movieName:String) : Fragment() {
     private var movieName:String = movieName
