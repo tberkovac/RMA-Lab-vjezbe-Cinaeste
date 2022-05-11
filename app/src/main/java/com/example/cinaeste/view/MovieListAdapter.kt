@@ -1,6 +1,7 @@
 package com.example.cinaeste.view
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +33,7 @@ class MovieListAdapter(
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieTitle.text = movies[position].title
-        val genreMatch: String = movies[position].genre
+        val genreMatch: String? = movies[position].genre
 
         val context: Context = holder.movieImage.context
 
@@ -48,6 +49,7 @@ class MovieListAdapter(
 
     fun updateMovies(movies: List<Movie>){
         this.movies = movies
+        Log.v("TAG", movies.size.toString())
         notifyDataSetChanged()
     }
 
