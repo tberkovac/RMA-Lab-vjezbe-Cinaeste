@@ -12,12 +12,15 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "TMDB_API_KEY", "\"c59ceaa6978a1fb0e138e54388049198\""
+        }
         release {
+            buildConfigField "String", "TMDB_API_KEY", "\"c59ceaa6978a1fb0e138e54388049198\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

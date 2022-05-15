@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.cinaeste.data.models.Movie
 import com.example.cinaeste.view.ActorsFragment
 import com.example.cinaeste.view.SimilarFragment
@@ -19,9 +20,9 @@ import com.google.android.material.navigation.NavigationBarView
 
 class MovieDetailActivity : AppCompatActivity() {
 
-    private var movieDetailViewModel =  MovieDetailViewModel()
+    private var movieDetailViewModel =  MovieDetailViewModel(this@MovieDetailActivity::movieRetrieved,null,null)
     private lateinit var bottomNavigation: BottomNavigationView
-    private lateinit var movie: Movie
+    private  var movie=Movie(0,"Test","Test","Test","Test","Test","Test","Test")
     private lateinit var title : TextView
     private lateinit var overview : TextView
     private lateinit var releaseDate : TextView
@@ -29,16 +30,19 @@ class MovieDetailActivity : AppCompatActivity() {
     private lateinit var website : TextView
     private lateinit var poster : ImageView
     private lateinit var shareButton : FloatingActionButton
+    private lateinit var backdrop : ImageView
+    private val posterPath = "https://image.tmdb.org/t/p/w780"
+    private val backdropPath = "https://image.tmdb.org/t/p/w500"
 
     private val mOnItemSelectedListener = NavigationBarView.OnItemSelectedListener{ item ->
         when(item.itemId){
             R.id.navForDetails_list_of_actors -> {
-                var actorsFragment = ActorsFragment(movie.title)
+                var actorsFragment = ActorsFragment(movie.title, movie.id)
                 openFragment(actorsFragment)
                 return@OnItemSelectedListener true
             }
             R.id.navForDetails_similar_movies -> {
-                var similarFragment = SimilarFragment(movie.title)
+                var similarFragment = SimilarFragment(movie.title, movie.id)
                 openFragment(similarFragment)
                 return@OnItemSelectedListener true
             }
@@ -59,6 +63,7 @@ class MovieDetailActivity : AppCompatActivity() {
         shareButton = findViewById(R.id.shareButton)
         bottomNavigation = findViewById(R.id.detailNavigation)
         bottomNavigation.setOnItemSelectedListener(mOnItemSelectedListener)
+        backdrop = findViewById(R.id.movie_backdrop)
 
         website.setOnClickListener{
             showWebsite()
@@ -74,24 +79,52 @@ class MovieDetailActivity : AppCompatActivity() {
         if (extras != null) {
             movie = movieDetailViewModel.getMovieByTitle(extras.getString("movie_title", ""))
             populateDetails()
+            if (extras.containsKey("movie_title")) {
+                movie = movieDetailViewModel.getMovieByTitle(extras.getString("movie_title", ""))
+                populateDetails()
+            } else if (extras.containsKey("movie_id")){
+                movieDetailViewModel.getMovieDetails(extras.getLong("movie_id"))
+            }
         } else {
             finish()
         }
 
         bottomNavigation.selectedItemId = R.id.navForDetails_list_of_actors
     }
+
+    fun movieRetrieved(movie:Movie){
+        this.movie =movie;
+        populateDetails()
+    }
+
     private fun populateDetails() {
         title.text=movie.title
         releaseDate.text=movie.releaseDate
         genre.text=movie.genre
         website.text=movie.homepage
         overview.text=movie.overview
-        val context: Context = poster.context
-        var id: Int = context.resources
-            .getIdentifier(movie.genre, "drawable", context.packageName)
-        if (id==0) id=context.resources
-            .getIdentifier("picture1", "drawable", context.packageName)
-        poster.setImageResource(id)
+
+        val context: Context = poster.getContext()
+        var id = 0;
+        if (movie.genre!==null)
+            id = context.getResources()
+                .getIdentifier(movie.genre, "drawable", context.getPackageName())
+        if (id===0) id=context.getResources()
+            .getIdentifier("picture1", "drawable", context.getPackageName())
+        Glide.with(context)
+            .load(posterPath + movie.posterPath)
+            .placeholder(R.drawable.defaultslika)
+            .error(id)
+            .fallback(id)
+            .into(poster);
+        var backdropContext: Context = backdrop.getContext()
+        Glide.with(backdropContext)
+            .load(backdropPath + movie.backdropPath)
+            .centerCrop()
+            .placeholder(R.drawable.backdrop)
+            .error(R.drawable.backdrop)
+            .fallback(R.drawable.backdrop)
+            .into(backdrop);
     }
 
     private fun showWebsite(){
