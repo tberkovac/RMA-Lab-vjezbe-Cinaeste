@@ -3,6 +3,7 @@ package com.example.cinaeste
 import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
 import android.transition.Fade
 import android.view.Window
@@ -60,6 +61,15 @@ class MainActivity : AppCompatActivity() {
         openFragment(favoritesFragment)
         if (intent?.action == Intent.ACTION_SEND && intent?.type == "text/plain")
             handleSendText(intent)
+
+        Intent(this, LatestMovieService::class.java).also {
+//Različito pokretanje u ovisnosti od verzije
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(it)
+                return
+            }
+            startService(it)
+        }
 
     }
 
