@@ -3,9 +3,11 @@ package com.example.cinaeste.view
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +29,11 @@ class FavoriteMoviesFragment : Fragment() {
         favoriteMoviesAdapter = MovieListAdapter(arrayListOf()) { movie,view1,view2 -> showMovieDetails(movie,view1,view2) }
 
         favoriteMovies.adapter=favoriteMoviesAdapter
-        favoriteMoviesAdapter.updateMovies(movieListViewModel.getFavoriteMovies())
+        movieListViewModel.getFavorites(
+            onSuccess = ::onSuccess,
+            onError = ::onError
+        )
+
         return view;
     }
     companion object {
@@ -35,11 +41,21 @@ class FavoriteMoviesFragment : Fragment() {
     }
     private fun showMovieDetails(movie: Movie, view1: View, view2: View) {
         val intent = Intent(activity, MovieDetailActivity::class.java).apply {
-            putExtra("movie_title", movie.title)
+            putExtra("movie", movie)
+            Log.v("FILM JE", movie.toString())
         }
         val options = ActivityOptions
                     .makeSceneTransitionAnimation(activity,  UtilPair.create(view1, "poster"),
                         UtilPair.create(view2, "title"))
         startActivity(intent, options.toBundle())
     }
+
+    fun onSuccess(movies:List<Movie>){
+        favoriteMoviesAdapter.updateMovies(movies)
+    }
+    fun onError() {
+        val toast = Toast.makeText(context, "Search error", Toast.LENGTH_SHORT)
+        toast.show()
+    }
+
 }

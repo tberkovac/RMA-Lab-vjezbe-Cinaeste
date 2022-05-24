@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,7 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private var movieDetailViewModel =  MovieDetailViewModel(this@MovieDetailActivity::movieRetrieved,null,null)
     private lateinit var bottomNavigation: BottomNavigationView
-    private  var movie=Movie(0,"Test","Test","Test","Test","Test","Test","Test")
+    private  var movie=Movie(0,"Test","Test","Test","Test", "Test","Test")
     private lateinit var title : TextView
     private lateinit var overview : TextView
     private lateinit var releaseDate : TextView
@@ -77,14 +78,8 @@ class MovieDetailActivity : AppCompatActivity() {
         val extras = intent.extras
 
         if (extras != null) {
-            movie = movieDetailViewModel.getMovieByTitle(extras.getString("movie_title", ""))
+            movie = extras.getParcelable("movie")!!
             populateDetails()
-            if (extras.containsKey("movie_title")) {
-                movie = movieDetailViewModel.getMovieByTitle(extras.getString("movie_title", ""))
-                populateDetails()
-            } else if (extras.containsKey("movie_id")){
-                movieDetailViewModel.getMovieDetails(extras.getLong("movie_id"))
-            }
         } else {
             finish()
         }
@@ -93,38 +88,30 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     fun movieRetrieved(movie:Movie){
-        this.movie =movie;
+        this.movie =movie
         populateDetails()
     }
 
     private fun populateDetails() {
+        Log.v("FILM JE", movie.toString())
         title.text=movie.title
         releaseDate.text=movie.releaseDate
-        genre.text=movie.genre
         website.text=movie.homepage
         overview.text=movie.overview
 
-        val context: Context = poster.getContext()
-        var id = 0;
-        if (movie.genre!==null)
-            id = context.getResources()
-                .getIdentifier(movie.genre, "drawable", context.getPackageName())
-        if (id===0) id=context.getResources()
-            .getIdentifier("picture1", "drawable", context.getPackageName())
+        val context: Context = poster.context
+
         Glide.with(context)
             .load(posterPath + movie.posterPath)
-            .placeholder(R.drawable.defaultslika)
-            .error(id)
-            .fallback(id)
-            .into(poster);
-        var backdropContext: Context = backdrop.getContext()
+            .into(poster)
+        var backdropContext: Context = backdrop.context
         Glide.with(backdropContext)
             .load(backdropPath + movie.backdropPath)
             .centerCrop()
             .placeholder(R.drawable.backdrop)
             .error(R.drawable.backdrop)
             .fallback(R.drawable.backdrop)
-            .into(backdrop);
+            .into(backdrop)
     }
 
     private fun showWebsite(){

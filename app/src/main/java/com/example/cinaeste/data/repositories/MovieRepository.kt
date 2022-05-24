@@ -1,6 +1,6 @@
 package com.example.cinaeste.data.repositories
 
-import android.util.Log
+import com.example.cinaeste.ApiAdapter
 import com.example.cinaeste.BuildConfig
 import com.example.cinaeste.data.models.*
 import com.example.cinaeste.data.staticdata.favoriteMovies
@@ -36,7 +36,7 @@ object MovieRepository {
             val url1 = "https://api.themoviedb.org/3/movie/$id?api_key=$tmdb_api_key"
             try {
                 val url = URL(url1)
-                var movie=Movie(0, "Test", "Test", "Test", "Test", "Test", "Test", "Test")
+                var movie=Movie(0, "Test", "Test", "Test", "Test", "Test", "Test")
                 (url.openConnection() as? HttpURLConnection)?.run {
                     val result = this.inputStream.bufferedReader().use { it.readText() }
                     val jsonObject = JSONObject(result)
@@ -47,7 +47,6 @@ object MovieRepository {
                     movie.releaseDate = jsonObject.getString("release_date")
                     movie.homepage = jsonObject.getString("homepage")
                     movie.backdropPath = jsonObject.getString("backdrop_path")
-                    movie.genre = jsonObject.getJSONArray("genres").getJSONObject(0).getString("name")
                 }
                 return@withContext Result.Success(movie);
             }
@@ -114,7 +113,8 @@ object MovieRepository {
                         val posterPath = movie.getString("poster_path")
                         val overview = movie.getString("overview")
                         val releaseDate = movie.getString("release_date")
-                        movies.add(Movie(id.toLong(), title, overview, releaseDate, null, null, posterPath, " "))
+                        movies.add(Movie(id.toLong(), title, overview, releaseDate, null,
+                            posterPath, " "))
                         if (i == 5) break
                     }
                 }
@@ -131,4 +131,31 @@ object MovieRepository {
         }
     }
 
+    suspend fun getUpcomingMovies(
+    ) : GetMoviesResponse?{
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.getUpcomingMovies()
+            val responseBody = response.body()
+            return@withContext responseBody
+        }
+    }
+
+    suspend fun getFavoriteMoviesAPI(
+    ) : GetMoviesResponse?{
+        return withContext(Dispatchers.IO) {
+            var response = ApiAdapter.retrofit.getFavoriteMovies()
+            val responseBody = response.body()
+            return@withContext responseBody
+        }
+    }
+/*
+    suspend fun getMovieByTitle(
+    ): Movie?{
+        return withContext(Dispatchers.IO){
+            var response = ApiAdapter.retrofit.getMovieByT
+        }
+    }
+
+
+ */
 }

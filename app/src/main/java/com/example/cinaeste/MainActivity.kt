@@ -7,9 +7,11 @@ import android.os.Build
 import android.os.Bundle
 import android.transition.Fade
 import android.view.Window
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import com.example.cinaeste.data.models.Movie
 import com.example.cinaeste.view.FavoriteMoviesFragment
 import com.example.cinaeste.view.RecentMoviesFragment
 import com.example.cinaeste.view.SearchFragment

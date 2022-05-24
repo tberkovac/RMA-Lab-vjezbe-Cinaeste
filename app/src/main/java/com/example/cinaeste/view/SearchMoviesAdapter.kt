@@ -32,21 +32,13 @@ class SearchMoviesAdapter : RecyclerView.Adapter<SearchMoviesAdapter.MovieViewHo
     }
 
     override fun onBindViewHolder(holder: SearchMoviesAdapter.MovieViewHolder, position: Int) {
-        val genreMatch: String? = movies[position].genre
         val context: Context = holder.movieImage.getContext()
-        var id: Int = 0;
-        if (genreMatch!==null)
-            id = context.getResources()
-                .getIdentifier(genreMatch, "drawable", context.getPackageName())
-        if (id===0) id=context.getResources()
-            .getIdentifier("defaultslika", "drawable", context.getPackageName())
+
         Glide.with(context)
             .load(posterPath + movies[position].posterPath)
             .centerCrop()
-            .placeholder(R.drawable.defaultslika)
-            .error(id)
-            .fallback(id)
             .into(holder.movieImage)
+
         holder.movieTitle.text = movies[position].title
     }
 

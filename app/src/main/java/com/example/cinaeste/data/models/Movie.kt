@@ -2,22 +2,22 @@ package com.example.cinaeste.data.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+
 data class Movie (
-    var id: Long,
-    var title: String,
-    var overview: String,
-    var releaseDate: String,
-    var homepage: String?,
-    var genre: String?,
-    var posterPath: String,
-    var backdropPath: String
+    @SerializedName("id") var id: Long,
+    @SerializedName("title")  var title: String,
+    @SerializedName("overview")  var overview: String,
+    @SerializedName("release_date")   var releaseDate: String,
+    @SerializedName("homepage")   var homepage: String?,
+    @SerializedName("poster_path") var posterPath: String?,
+    @SerializedName("backdrop_path")  var backdropPath: String?
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString(),
         parcel.readString(),
         parcel.readString()!!,
         parcel.readString()!!) {
@@ -28,7 +28,6 @@ data class Movie (
         parcel.writeString(overview)
         parcel.writeString(releaseDate)
         parcel.writeString(homepage)
-        parcel.writeString(genre)
         parcel.writeString(posterPath)
         parcel.writeString(backdropPath)
     }

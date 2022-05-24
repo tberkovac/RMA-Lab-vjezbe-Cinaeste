@@ -29,23 +29,13 @@ class MovieListAdapter(
     override fun getItemCount(): Int = movies.size
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
 
-        holder.movieTitle.text = movies[position].title;
-        val genreMatch: String? = movies[position].genre
-        //Pronalazimo id drawable elementa na osnovu naziva žanra
-        val context: Context = holder.movieImage.getContext()
-        var id: Int = 0;
-        if (genreMatch!==null)
-            id = context.getResources()
-                .getIdentifier(genreMatch, "drawable", context.getPackageName())
-        if (id===0) id=context.getResources()
-            .getIdentifier("picture1", "drawable", context.getPackageName())
+        holder.movieTitle.text = movies[position].title
+        val context: Context = holder.movieImage.context
+
         Glide.with(context)
             .load(posterPath + movies[position].posterPath)
             .centerCrop()
-            .placeholder(R.drawable.defaultslika)
-            .error(id)
-            .fallback(id)
-            .into(holder.movieImage);
+            .into(holder.movieImage)
 
         holder.itemView.setOnClickListener{ onItemClicked(movies[position],holder.movieImage,holder.movieTitle) }
 
@@ -57,6 +47,5 @@ class MovieListAdapter(
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
         val movieTitle: TextView = itemView.findViewById(R.id.movieTitle)
-
     }
 }
