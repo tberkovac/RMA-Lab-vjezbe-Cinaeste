@@ -9,5 +9,4 @@ object ApiAdapter {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(Api::class.java)
-
 }

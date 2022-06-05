@@ -30,31 +30,32 @@ fun favoriteMovies(): List<Movie> {
             "https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/")
     )
 }
+
 fun recentMovies(): List<Movie> {
     return listOf(
-        Movie(1,"The Contractor",
-            "A discharged U.S. Special Forces sergeant, James Harper, risks everything for his family when he joins a private contracting organization.",
-            "01.04.2022.","https://www.imdb.com/title/tt10323676/",
+        Movie(1,"The Courier",
+            "Cold War spy Greville Wynne and his Russian source try to put an end to the Cuban Missile Crisis.",
+            "17.05.2021.","https://www.imdb.com/title/tt8368512/",
             "https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
-        Movie(2,"Morbius",
-            "Biochemist Michael Morbius tries to cure himself of a rare blood disease, but he inadvertently infects himself with a form of vampirism instead.",
-            "31.03.2022.","https://www.imdb.com/title/tt5108870/",
+        Movie(2,"Nobody",
+            "A bystander who intervenes to help a woman being harassed by a group of men becomes the target of a vengeful drug lord.",
+            "04.06.2021","https://www.imdb.com/title/tt7888964/",
             "https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
-        Movie(3,"Doctor Strange in the Multiverse of Madness",
-            "Dr. Stephen Strange casts a forbidden spell that opens the door to the multiverse, including an alternate version of himself, whose threat to humanity is too great for the combined forces of Strange, Wong, and Wanda Maximoff.",
-            "05.05.2022.","https://www.imdb.com/title/tt9419884/",
+        Movie(3,"Black Widow",
+            "A film about Natasha Romanoff in her quests between the films Civil War and Infinity War.",
+            "07.04.2021.","https://www.imdb.com/title/tt3480822/",
             "https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
-        Movie(4,"Jurassic World: Dominion ",
-            "Four years after the destruction of Isla Nublar, dinosaurs now live--and hunt--alongside humans all over the world. This fragile balance will reshape the future and determine, once and for all, whether human beings are to remain the apex predators on a planet they now share with history's most fearsome creatures.",
-            "10.06.2022.","https://www.imdb.com/title/tt8041270/",
+        Movie(4,"Godzilla vs. Kong ",
+            "The epic next chapter in the cinematic Monsterverse pits two of the greatest icons in motion picture history against one another - the fearsome Godzilla and the mighty Kong - with humanity caught in the balance.",
+            "01.04.2021","https://www.imdb.com/title/tt5034838",
             "https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
         Movie(5,"Top Gun: Maverick",
             "After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him.",
-            "27.05.2022","https://www.imdb.com/title/tt1745960/",
+            "09.07.2021","h,ttps://www.imdb.com/title/tt1745960/",
             "https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/"),
-        Movie(6,"Sonic the Hedgehog 2",
-            "When the manic Dr Robotnik returns to Earth with a new ally, Knuckles the Echidna, Sonic and his new friend Tails is all that stands in their way.",
-            "01.04.2022.","https://www.imdb.com/title/tt12412888/",
+        Movie(6,"Luca",
+            "On the Italian Riviera, an unlikely but strong friendship grows between a human being and a sea monster disguised as a human.",
+            "18.06.2021.","https://www.imdb.com/title/tt12801262/",
             "https://www.imdb.com/title/tt0414387/","https://www.imdb.com/title/tt0414387/")
     )
 }

@@ -3,7 +3,7 @@ package com.example.cinaeste.view
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.util.Pair
+import android.util.Pair as UtilPair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,35 +17,31 @@ import com.example.cinaeste.data.models.Movie
 import com.example.cinaeste.viewmodel.MovieListViewModel
 
 class RecentMoviesFragment : Fragment() {
-    private lateinit var recentMovies : RecyclerView
-    private lateinit var recentMoviesAdapter : MovieListAdapter
-    private var movieListViewModel = MovieListViewModel(null,null)
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        var view = inflater.inflate(R.layout.recents_fragment, container, false)
+
+    private lateinit var recentMovies: RecyclerView
+    private lateinit var recentMoviesAdapter: MovieListAdapter
+    private var movieListViewModel =  MovieListViewModel()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        var view =  inflater.inflate(R.layout.recents_fragment, container, false)
         recentMovies = view.findViewById(R.id.recentMovies)
         recentMovies.layoutManager = GridLayoutManager(activity, 2)
-        recentMoviesAdapter = MovieListAdapter(arrayListOf()) { movie,view1,view2 ->
-            showMovieDetails(movie,view1,view2) }
-        recentMovies.adapter = recentMoviesAdapter
-        movieListViewModel.getUpcoming(
-            onSuccess = ::onSuccess,
-            onError = ::onError
-        )
+        recentMoviesAdapter = MovieListAdapter(arrayListOf()) { movie,view1,view2 -> showMovieDetails(movie,view1,view2) }
+        recentMovies.adapter=recentMoviesAdapter
+        /*  movieListViewModel.getUpcoming(
+              onSuccess = ::onSuccess,
+              onError = ::onError
+          )*/
+        movieListViewModel.getUpcoming2( onSuccess = ::onSuccess,
+            onError = ::onError)
         return view;
     }
     companion object {
         fun newInstance(): RecentMoviesFragment = RecentMoviesFragment()
-    }
-
-    private fun showMovieDetails(movie: Movie, view1: View, view2: View) {
-        val intent = Intent(activity, MovieDetailActivity::class.java).apply {
-            putExtra("movie", movie)
-        }
-        val options = ActivityOptions
-            .makeSceneTransitionAnimation(activity,  Pair.create(view1, "poster"),
-                Pair.create(view2, "title"))
-        startActivity(intent, options.toBundle())
     }
 
     fun onSuccess(movies:List<Movie>){
@@ -58,5 +54,13 @@ class RecentMoviesFragment : Fragment() {
         toast.show()
     }
 
-
+    private fun showMovieDetails(movie: Movie, view1: View, view2:View) {
+        val intent = Intent(activity, MovieDetailActivity::class.java).apply {
+            putExtra("movie_id", movie.id)
+        }
+        val options = ActivityOptions
+            .makeSceneTransitionAnimation(activity,  android.util.Pair.create(view1, "poster"),
+                android.util.Pair.create(view2, "title"))
+        startActivity(intent, options.toBundle())
+    }
 }

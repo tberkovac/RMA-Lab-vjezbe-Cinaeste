@@ -1,5 +1,6 @@
 package com.example.cinaeste.data.models
 
+import com.example.cinaeste.data.models.Movie
 import com.google.gson.annotations.SerializedName
 
 data class GetMoviesResponse(

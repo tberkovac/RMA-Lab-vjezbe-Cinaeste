@@ -18,24 +18,26 @@ class MovieListAdapter(
     private val onItemClicked: (movie:Movie,view1:View,view2:View) -> Unit
 ) : RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
-    private val posterPath = "https://image.tmdb.org/t/p/w342"
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.kartice_elementi, parent, false)
         return MovieViewHolder(view)
     }
+
+    private val posterPath = "https://image.tmdb.org/t/p/w342"
     override fun getItemCount(): Int = movies.size
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-
-        holder.movieTitle.text = movies[position].title
-        val context: Context = holder.movieImage.context
+        holder.movieTitle.text = movies[position].title;
+        val context: Context = holder.movieImage.getContext()
 
         Glide.with(context)
             .load(posterPath + movies[position].posterPath)
             .centerCrop()
-            .into(holder.movieImage)
+            .placeholder(R.drawable.defaultslika)
+            .error(R.drawable.defaultslika)
+            .fallback(R.drawable.defaultslika)
+            .into(holder.movieImage);
 
         holder.itemView.setOnClickListener{ onItemClicked(movies[position],holder.movieImage,holder.movieTitle) }
 
@@ -47,5 +49,6 @@ class MovieListAdapter(
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val movieImage: ImageView = itemView.findViewById(R.id.movieImage)
         val movieTitle: TextView = itemView.findViewById(R.id.movieTitle)
+
     }
 }

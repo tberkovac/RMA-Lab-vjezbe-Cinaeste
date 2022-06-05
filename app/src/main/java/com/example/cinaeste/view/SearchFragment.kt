@@ -32,7 +32,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.search_fragment, container, false)
-        movieListViewModel = MovieListViewModel(this@SearchFragment::searchDone,this@SearchFragment::onError)
+        movieListViewModel = MovieListViewModel()
         searchMoviesAdapter = MovieListAdapter(arrayListOf()) { movie,view1,view2 -> showMovieDetails(movie,view1,view2)}
         searchText = view.findViewById(R.id.searchText)
         searchButton = view.findViewById(R.id.searchButton)
@@ -50,7 +50,8 @@ class SearchFragment : Fragment() {
     private fun onClick() {
         val toast = Toast.makeText(context, "Search start", Toast.LENGTH_SHORT)
         toast.show()
-        movieListViewModel.search(searchText.text.toString())
+        movieListViewModel.search(searchText.text.toString(), onSuccess = ::searchDone,
+            onError = ::onError)
     }
 
     fun searchDone(movies:List<Movie>){
