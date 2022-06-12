@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinaeste.MovieDetailActivity
@@ -20,7 +21,7 @@ class RecentMoviesFragment : Fragment() {
 
     private lateinit var recentMovies: RecyclerView
     private lateinit var recentMoviesAdapter: MovieListAdapter
-    private var movieListViewModel =  MovieListViewModel()
+    private lateinit var movieListViewModel : MovieListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,12 +33,10 @@ class RecentMoviesFragment : Fragment() {
         recentMovies.layoutManager = GridLayoutManager(activity, 2)
         recentMoviesAdapter = MovieListAdapter(arrayListOf()) { movie,view1,view2 -> showMovieDetails(movie,view1,view2) }
         recentMovies.adapter=recentMoviesAdapter
-        /*  movieListViewModel.getUpcoming(
-              onSuccess = ::onSuccess,
-              onError = ::onError
-          )*/
-        movieListViewModel.getUpcoming2( onSuccess = ::onSuccess,
-            onError = ::onError)
+
+        context?.let { movieListViewModel= MovieListViewModel(it) }
+        movieListViewModel!!.getUpcoming2(::onSuccess, ::onError)
+
         return view;
     }
     companion object {

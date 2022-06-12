@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinaeste.MovieDetailActivity
@@ -20,7 +21,7 @@ import android.util.Pair as UtilPair
 class FavoriteMoviesFragment : Fragment() {
     private lateinit var favoriteMovies: RecyclerView
     private lateinit var favoriteMoviesAdapter: MovieListAdapter
-    private var movieListViewModel = MovieListViewModel()
+    private lateinit var movieListViewModel : MovieListViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.favorites_fragment, container, false)
@@ -30,25 +31,25 @@ class FavoriteMoviesFragment : Fragment() {
 
         favoriteMovies.adapter=favoriteMoviesAdapter
 
-        context?.let {
-            movieListViewModel.getFavorites(
-                it,onSuccess = ::onSuccess,
-                onError = ::onError)
+        val moviesObserver = Observer<List<Movie>> { movies ->
+            favoriteMoviesAdapter.updateMovies(movies)
         }
+        context?.let { movieListViewModel= MovieListViewModel(it) }
+        movieListViewModel.favoriteMovies.observe(viewLifecycleOwner, moviesObserver)
+
 
         return view;
     }
     companion object {
         fun newInstance(): FavoriteMoviesFragment = FavoriteMoviesFragment()
     }
-    private fun showMovieDetails(movie: Movie, view1: View, view2: View) {
+    private fun showMovieDetails(movie: Movie, view1: View, view2:View) {
         val intent = Intent(activity, MovieDetailActivity::class.java).apply {
-            putExtra("movie", movie)
-            Log.v("FILM JE", movie.toString())
+            putExtra("movie_id", movie.id)
         }
         val options = ActivityOptions
-                    .makeSceneTransitionAnimation(activity,  UtilPair.create(view1, "poster"),
-                        UtilPair.create(view2, "title"))
+            .makeSceneTransitionAnimation(activity,  android.util.Pair.create(view1, "poster"),
+                android.util.Pair.create(view2, "title"))
         startActivity(intent, options.toBundle())
     }
 

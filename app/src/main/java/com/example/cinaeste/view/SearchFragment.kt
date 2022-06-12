@@ -32,9 +32,9 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.search_fragment, container, false)
-        movieListViewModel = MovieListViewModel()
         searchMoviesAdapter = MovieListAdapter(arrayListOf()) { movie,view1,view2 -> showMovieDetails(movie,view1,view2)}
         searchText = view.findViewById(R.id.searchText)
+        context?.let {  movieListViewModel = MovieListViewModel(it)}
         searchButton = view.findViewById(R.id.searchButton)
         listaPretrazenihFilmova = view.findViewById(R.id.listaPretrazenihFilmova)
         arguments?.getString("search")?.let {

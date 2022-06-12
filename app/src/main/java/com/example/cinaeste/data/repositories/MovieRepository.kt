@@ -1,6 +1,7 @@
 package com.example.cinaeste.data.repositories
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import com.example.cinaeste.ApiAdapter
 import com.example.cinaeste.BuildConfig
 import com.example.cinaeste.data.models.GetMoviesResponse
@@ -23,13 +24,6 @@ object MovieRepository {
 
     private const val tmdb_api_key = BuildConfig.TMDB_API_KEY
 
-    suspend fun getFavoriteMovies(context: Context) : List<Movie> {
-        return withContext(Dispatchers.IO) {
-            var db = AppDatabase.getInstance(context)
-            var movies = db!!.movieDao().getAll()
-            return@withContext movies
-        }
-    }
     suspend fun deleteMovie(context: Context, movie: Movie) : String?{
         return withContext(Dispatchers.IO){
             try {
@@ -127,6 +121,12 @@ object MovieRepository {
             val responseBody = response.body()
             return@withContext responseBody
         }
+    }
+
+    fun getFavorites(context: Context) : LiveData<List<Movie>> {
+        var db = AppDatabase.getInstance(context)
+        var movies = db!!.movieDao().getAll()
+        return movies
     }
 
 
